@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const backendUrl = import.meta.env.VITE_API_URL || "http://192.168.0.30:3000";
+const backendUrl = import.meta.env.VITE_API_URL || "http://192.168.0.34:3000";
 
 const ChatContext = createContext();
 
@@ -15,6 +15,7 @@ export const ChatProvider = ({ children }) => {
       body: JSON.stringify({ message }),
     });
     const resp = (await data.json()).messages;
+    console.log("The messages received from backend are ", ...resp)
     setMessages((messages) => [...messages, ...resp]);
     setLoading(false);
   };
@@ -24,6 +25,7 @@ export const ChatProvider = ({ children }) => {
   const [cameraZoomed, setCameraZoomed] = useState(true);
   const onMessagePlayed = () => {
     setMessages((messages) => messages.slice(1));
+    console.log("Front end one message is played and it is removed from messages. Now the message count is ", messages.length)
   };
 
   useEffect(() => {

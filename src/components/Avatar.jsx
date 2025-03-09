@@ -116,7 +116,6 @@ export function Avatar(props) {
   const [lipsync, setLipsync] = useState();
 
   useEffect(() => {
-    console.log(message);
     if (!message) {
       setAnimation("Idle");
       return;
@@ -128,6 +127,7 @@ export function Avatar(props) {
     audio.play();
     setAudio(audio);
     audio.onended = onMessagePlayed;
+    console.debug("The message played that is received from backend is ", message);
   }, [message]);
 
   const { animations } = useGLTF("/models/animations.glb");
